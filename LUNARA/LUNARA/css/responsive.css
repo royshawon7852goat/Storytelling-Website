@@ -1,0 +1,159 @@
+/* ==========================================================================
+   LUNARA — Responsive Breakpoints (Desktop, Tablet, Mobile)
+   ========================================================================== */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  .stage-moon {
+    top: 10vh;
+    width: clamp(165px, 24vw, 240px);
+  }
+
+  .clouds-layer--back {
+    top: 16%;
+    height: 36vh;
+  }
+
+  .clouds-layer--front {
+    top: 25%;
+    height: 40vh;
+  }
+
+  .section-beginning .layer-distant-mountains,
+  .section-whisper .whisper-distant-ridge {
+    height: 46vh;
+  }
+
+  .section-beginning .layer-mountains,
+  .section-whisper .whisper-main-ridge {
+    height: 42vh;
+  }
+
+  .section-beginning .layer-forest-hero,
+  .section-forest .forest-mid-trees {
+    height: 44vh;
+  }
+
+  .section-forest .forest-foreground-trees {
+    height: 58vh;
+  }
+}
+
+/* Mobile (<= 767px) */
+@media (max-width: 767px) {
+  .chapter-rail {
+    right: 0.4rem;
+  }
+
+  .chapter-dot__label {
+    display: none;
+  }
+
+  .chapter-rail__list::before {
+    right: 17px;
+  }
+
+  .stage-moon {
+    top: 9vh;
+    width: clamp(150px, 40vw, 200px);
+  }
+
+  .clouds-layer--back {
+    top: 18%;
+    height: 30vh;
+  }
+
+  .clouds-layer--front {
+    top: 26%;
+    height: 32vh;
+  }
+
+  .parallax-layer {
+    left: -14%;
+    width: 128%;
+  }
+
+  .section-beginning .layer-distant-mountains,
+  .section-whisper .whisper-distant-ridge {
+    height: 40vh;
+    bottom: 6%;
+  }
+
+  .section-beginning .layer-mountains,
+  .section-whisper .whisper-main-ridge {
+    height: 36vh;
+    bottom: 2%;
+  }
+
+  .section-beginning .layer-forest-hero {
+    height: 35vh;
+    bottom: -1%;
+  }
+
+  .section-forest .forest-mid-trees {
+    height: 40vh;
+  }
+
+  .section-forest .forest-foreground-trees {
+    height: 52vh;
+  }
+
+  .section-lake .lake-distant-peaks {
+    height: 36vh;
+    bottom: 24%;
+  }
+
+  .hero-content {
+    margin-top: 2rem;
+    padding: 1.5rem 2.25rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.35rem, 11.2vw, 3.5rem);
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
+  }
+
+  .scroll-cue {
+    margin-top: 2.5rem;
+  }
+
+  .scroll-cue__text {
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
+  }
+
+  .section-content {
+    width: min(84vw, 32rem);
+    padding: 1.25rem 1.75rem;
+  }
+
+  .finale-content {
+    margin-top: 11.5rem;
+  }
+
+  .finale-heading {
+    letter-spacing: 0.12em;
+    text-indent: 0.12em;
+  }
+
+  .restart-btn {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* Very small viewports (<= 380px) */
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 2.75rem;
+    letter-spacing: 0.18em;
+    text-indent: 0.18em;
+  }
+
+  .poetic-line--lg {
+    font-size: 1.45rem;
+  }
+}

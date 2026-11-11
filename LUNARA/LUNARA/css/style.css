@@ -1,0 +1,1012 @@
+/* ==========================================================================
+   LUNARA — Design System, Local Typography & Scenic Architecture
+   ========================================================================== */
+
+@font-face {
+  font-family: "Cinzel";
+  src: url("../assets/fonts/cinzel-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cinzel";
+  src: url("../assets/fonts/cinzel-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/cormorant-garamond-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/cormorant-garamond-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/cormorant-garamond-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/cormorant-garamond-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../assets/fonts/plus-jakarta-sans-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../assets/fonts/plus-jakarta-sans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../assets/fonts/plus-jakarta-sans-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Core Palette */
+  --color-midnight: #080B16;
+  --color-navy: #101A32;
+  --color-silver: #DCE6F5;
+  --color-mist: #8EAACB;
+  --color-white: #F5F7FF;
+
+  /* Dynamic Sky Tokens (interpolated by ScrollTrigger) */
+  --sky-top: #080B16;
+  --sky-mid: #0C1326;
+  --sky-bottom: #101A32;
+
+  /* Typography */
+  --font-display: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Spacing & Easing */
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --z-stage: 1;
+  --z-sections: 10;
+  --z-rail: 40;
+  --z-preloader: 100;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-midnight);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: var(--color-midnight);
+  color: var(--color-white);
+  min-height: 100vh;
+  overflow-x: clip;
+  position: relative;
+}
+
+body.is-loading {
+  overflow: hidden;
+  height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+a,
+button {
+  color: inherit;
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-silver);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-navy);
+  color: var(--color-white);
+  border: 1px solid rgba(220, 230, 245, 0.45);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ==========================================================================
+   Preloader Veil
+   ========================================================================== */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 42%, #111c36 0%, #080b16 70%);
+  transition: opacity 0.9s var(--ease-cinematic), visibility 0.9s var(--ease-cinematic);
+}
+
+.preloader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.preloader__crescent {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+}
+
+.preloader__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 230, 245, 0.2);
+  border-top-color: var(--color-silver);
+}
+
+.preloader__orb {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--color-white), var(--color-mist));
+  box-shadow: 0 0 28px rgba(220, 230, 245, 0.45);
+}
+
+.preloader__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.45em;
+  text-indent: 0.45em;
+  color: var(--color-white);
+}
+
+.preloader__bar {
+  width: 160px;
+  height: 1px;
+  background: rgba(142, 170, 203, 0.24);
+  overflow: hidden;
+}
+
+.preloader__fill {
+  display: block;
+  width: 15%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-mist), var(--color-white));
+  transition: width 0.35s ease;
+}
+
+.preloader__caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-mist);
+}
+
+/* ==========================================================================
+   Fixed Celestial Stage (Sky, Stars, Moon, Clouds, Ambient Particles)
+   ========================================================================== */
+
+.celestial-stage {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-stage);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sky-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--sky-top) 0%,
+    var(--sky-mid) 52%,
+    var(--sky-bottom) 100%
+  );
+  will-change: background;
+}
+
+.horizon-atmosphere {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.horizon-atmosphere__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.stage-layer,
+.stage-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stage-layer--stars {
+  inset: -8vh 0;
+  height: 116vh;
+  opacity: 0.78;
+  will-change: transform, opacity;
+}
+
+.stage-img--cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stage-canvas--stars {
+  z-index: 2;
+}
+
+.stage-moon {
+  position: absolute;
+  top: 8vh;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: clamp(175px, 19vw, 275px);
+  aspect-ratio: 1 / 1;
+  z-index: 3;
+  will-change: transform, filter;
+}
+
+.stage-moon__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.stage-moon__aura {
+  position: absolute;
+  inset: -115%;
+  background: radial-gradient(
+    closest-side,
+    rgba(220, 230, 245, 0.24) 0%,
+    rgba(142, 170, 203, 0.14) 36%,
+    rgba(142, 170, 203, 0.05) 66%,
+    rgba(16, 26, 50, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.stage-moon__corona {
+  position: absolute;
+  inset: -45%;
+  background: radial-gradient(
+    closest-side,
+    rgba(245, 247, 255, 0.34) 44%,
+    rgba(220, 230, 245, 0.14) 64%,
+    rgba(220, 230, 245, 0.03) 84%,
+    rgba(220, 230, 245, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.stage-moon__img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 28px rgba(220, 230, 245, 0.38));
+}
+
+/* Drifting Clouds */
+.clouds-layer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.clouds-layer--back {
+  top: 14%;
+  height: 44vh;
+  z-index: 2;
+  opacity: 0.42;
+}
+
+.clouds-layer--front {
+  top: 24%;
+  height: 48vh;
+  z-index: 4;
+  opacity: 0.65;
+}
+
+.clouds-offset {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.clouds-track {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  will-change: transform;
+}
+
+.clouds-img {
+  width: 33.3333%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.92;
+}
+
+.clouds-img--mirrored {
+  transform: scaleX(-1);
+}
+
+.stage-canvas--particles {
+  z-index: 5;
+}
+
+/* ==========================================================================
+   Minimal Chapter Progress Rail
+   ========================================================================== */
+
+.chapter-rail {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 2.25rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-rail);
+}
+
+.chapter-rail__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  position: relative;
+}
+
+.chapter-rail__list::before {
+  content: "";
+  position: absolute;
+  right: 17px;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(142, 170, 203, 0.08),
+    rgba(220, 230, 245, 0.25),
+    rgba(142, 170, 203, 0.08)
+  );
+  pointer-events: none;
+}
+
+.chapter-dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  min-width: 44px;
+  min-height: 36px;
+  padding-right: 11px;
+  text-decoration: none;
+}
+
+.chapter-dot__label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-silver);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(8, 11, 22, 0.9);
+  pointer-events: none;
+}
+
+.chapter-dot__pip {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 230, 245, 0.55);
+  background: rgba(8, 11, 22, 0.7);
+  transition: transform 0.3s var(--ease-cinematic), background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.chapter-dot:hover .chapter-dot__label,
+.chapter-dot:focus-visible .chapter-dot__label {
+  opacity: 0.92;
+  transform: translateX(0);
+}
+
+.chapter-dot:hover .chapter-dot__pip,
+.chapter-dot:focus-visible .chapter-dot__pip {
+  transform: scale(1.4);
+  border-color: var(--color-white);
+}
+
+.chapter-dot.is-active .chapter-dot__pip {
+  background: var(--color-white);
+  border-color: var(--color-white);
+  transform: scale(1.55);
+  box-shadow: 0 0 12px rgba(245, 247, 255, 0.85);
+}
+
+/* ==========================================================================
+   Story Sections & Parallax Layers
+   ========================================================================== */
+
+.journey {
+  position: relative;
+  z-index: var(--z-sections);
+}
+
+.story-section {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.scene-layers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.parallax-layer {
+  position: absolute;
+  left: -6%;
+  width: 112%;
+  bottom: 0;
+  will-change: transform, opacity;
+}
+
+.scene-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.scene-img--mist {
+  object-fit: fill;
+  opacity: 0.78;
+}
+
+/* Section 1: The Beginning */
+.section-beginning .layer-distant-mountains {
+  height: clamp(50vh, 52vw, 76vh);
+  bottom: 8%;
+  z-index: 1;
+  opacity: 0.82;
+}
+
+.section-beginning .layer-mountains {
+  height: clamp(46vh, 48vw, 72vh);
+  bottom: 2%;
+  z-index: 2;
+}
+
+.section-beginning .layer-hero-mist {
+  height: 28vh;
+  bottom: 0;
+  z-index: 3;
+}
+
+.section-beginning .layer-forest-hero {
+  height: clamp(44vh, 46vw, 68vh);
+  bottom: -2%;
+  z-index: 4;
+}
+
+.section-content {
+  position: relative;
+  z-index: 10;
+  width: min(92vw, 56rem);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-content {
+  margin-top: clamp(3rem, 8vh, 6rem);
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: -65% -35%;
+  z-index: -1;
+  background: radial-gradient(
+    closest-side,
+    rgba(8, 11, 22, 0.58) 0%,
+    rgba(8, 11, 22, 0.24) 55%,
+    rgba(8, 11, 22, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.25rem, 10vw, 8.25rem);
+  line-height: 1;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  color: var(--color-white);
+  text-shadow: 0 8px 42px rgba(8, 11, 22, 0.85), 0 0 28px rgba(220, 230, 245, 0.25);
+  opacity: 0;
+  filter: blur(18px);
+}
+
+.hero-subtitle {
+  margin-top: 1.25rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.125rem, 2.2vw, 1.75rem);
+  letter-spacing: 0.08em;
+  color: var(--color-silver);
+  text-shadow: 0 2px 18px rgba(8, 11, 22, 0.9);
+  opacity: 0;
+}
+
+.scroll-cue {
+  margin-top: clamp(3rem, 10vh, 6.5rem);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.65rem 1.25rem;
+  text-decoration: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.scroll-cue__text {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  color: var(--color-silver);
+  text-shadow: 0 2px 12px rgba(8, 11, 22, 0.95);
+}
+
+.scroll-cue__icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.85;
+}
+
+/* Shared Poetic Storytelling Typography */
+.text-scrim {
+  position: absolute;
+  inset: -75% -35%;
+  z-index: -1;
+  background: radial-gradient(
+    closest-side,
+    rgba(8, 11, 22, 0.66) 0%,
+    rgba(8, 11, 22, 0.28) 54%,
+    rgba(8, 11, 22, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.text-scrim--horizon {
+  background: radial-gradient(
+    closest-side,
+    rgba(8, 11, 22, 0.52) 0%,
+    rgba(16, 26, 50, 0.22) 56%,
+    rgba(16, 26, 50, 0) 100%
+  );
+}
+
+.text-scrim--finale {
+  background: radial-gradient(
+    closest-side,
+    rgba(8, 11, 22, 0.64) 0%,
+    rgba(8, 11, 22, 0.25) 56%,
+    rgba(8, 11, 22, 0) 100%
+  );
+}
+
+.poetic-line {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 1.35;
+  color: var(--color-white);
+  text-shadow: 0 4px 28px rgba(8, 11, 22, 0.95);
+  max-width: 28ch;
+}
+
+.poetic-line--lg {
+  font-size: clamp(1.65rem, 4vw, 3.25rem);
+  letter-spacing: 0.02em;
+}
+
+.poetic-line--md {
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  color: var(--color-silver);
+  letter-spacing: 0.03em;
+}
+
+.poetic-line--accent {
+  margin-top: 0.65rem;
+  color: var(--color-silver);
+}
+
+.reveal-word {
+  display: inline-block;
+  will-change: opacity, transform, filter;
+}
+
+/* Section 2: The Whisper of the Night */
+.section-whisper .whisper-distant-ridge {
+  height: clamp(50vh, 52vw, 76vh);
+  bottom: 4%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.section-whisper .whisper-main-ridge {
+  height: clamp(46vh, 48vw, 70vh);
+  bottom: -2%;
+  opacity: 0;
+  z-index: 2;
+}
+
+.section-whisper .whisper-mist {
+  height: 30vh;
+  bottom: 0;
+  opacity: 0;
+  z-index: 3;
+}
+
+/* Section 3: The Enchanted Forest */
+.section-forest .forest-distant-mountains {
+  height: clamp(46vh, 48vw, 70vh);
+  bottom: 12%;
+  z-index: 1;
+  opacity: 0.45;
+}
+
+.section-forest .forest-pathway-backdrop {
+  top: 0;
+  bottom: 0;
+  left: -4%;
+  width: 108%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+}
+
+.section-forest .forest-pathway-backdrop .scene-img {
+  object-position: center center;
+}
+
+.moonbeams-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+.moonbeam {
+  position: absolute;
+  top: -15%;
+  width: 24vw;
+  height: 135%;
+  background: linear-gradient(
+    180deg,
+    rgba(220, 230, 245, 0.22) 0%,
+    rgba(142, 170, 203, 0.1) 50%,
+    rgba(8, 11, 22, 0) 92%
+  );
+  filter: blur(22px);
+  transform-origin: top center;
+}
+
+.moonbeam--1 {
+  left: 24%;
+  transform: rotate(-22deg);
+}
+
+.moonbeam--2 {
+  left: 46%;
+  width: 30vw;
+  transform: rotate(-17deg);
+}
+
+.moonbeam--3 {
+  left: 66%;
+  width: 18vw;
+  transform: rotate(-12deg);
+}
+
+.section-forest .forest-mid-trees {
+  height: clamp(54vh, 56vw, 80vh);
+  bottom: -4%;
+  z-index: 4;
+}
+
+.section-forest .forest-ground-fog {
+  height: 32vh;
+  bottom: -2%;
+  z-index: 5;
+  opacity: 0.72;
+}
+
+.section-forest .forest-foreground-trees {
+  height: clamp(64vh, 66vw, 94vh);
+  bottom: -6%;
+  z-index: 6;
+}
+
+.section-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.section-canvas--fireflies {
+  z-index: 7;
+}
+
+/* Section 4: The Silver Lake */
+.section-lake .lake-distant-peaks {
+  height: clamp(42vh, 45vw, 66vh);
+  bottom: 22%;
+  z-index: 1;
+  opacity: 0.55;
+}
+
+.section-lake .lake-water-backdrop {
+  top: 0;
+  bottom: 0;
+  left: -4%;
+  width: 108%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+}
+
+.section-lake .lake-water-backdrop .scene-img {
+  object-position: center bottom;
+}
+
+.section-canvas--lake {
+  z-index: 3;
+}
+
+.section-lake .lake-shore-mist {
+  height: 26vh;
+  bottom: 26%;
+  z-index: 4;
+  opacity: 0.45;
+}
+
+.lake-content {
+  margin-bottom: clamp(4rem, 12vh, 8rem);
+}
+
+/* Section 5: Beyond the Horizon */
+.section-horizon .horizon-distant-ridge {
+  height: clamp(40vh, 42vw, 60vh);
+  bottom: -4%;
+  z-index: 2;
+  opacity: 0.35;
+}
+
+.horizon-light-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 52, 96, 0) 35%,
+    rgba(142, 170, 203, 0.2) 72%,
+    rgba(220, 230, 245, 0.35) 100%
+  );
+  opacity: 0;
+}
+
+.horizon-content {
+  margin-top: clamp(7rem, 18vh, 11rem);
+  gap: 0.75rem;
+}
+
+/* Section 6: The End Is Another Beginning */
+.section-finale {
+  padding-bottom: 2rem;
+}
+
+.finale-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 34%,
+    rgba(220, 230, 245, 0.12) 0%,
+    rgba(16, 26, 50, 0) 58%
+  );
+}
+
+.finale-content {
+  margin-top: clamp(10.5rem, 27vh, 16rem);
+  gap: 1.15rem;
+}
+
+.finale-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.85rem, 4.6vw, 3.85rem);
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+  line-height: 1.25;
+  color: var(--color-white);
+  text-shadow: 0 4px 32px rgba(8, 11, 22, 0.95);
+}
+
+.finale-subtext {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+  letter-spacing: 0.05em;
+  color: var(--color-silver);
+  text-shadow: 0 2px 18px rgba(8, 11, 22, 0.95);
+}
+
+.restart-btn {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.9rem 2rem;
+  background: rgba(16, 26, 50, 0.55);
+  border: 1px solid rgba(220, 230, 245, 0.38);
+  border-radius: 999px;
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-indent: 0.12em;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background-color 0.35s var(--ease-cinematic), border-color 0.35s ease, transform 0.35s var(--ease-cinematic), box-shadow 0.35s ease;
+}
+
+.restart-btn:hover {
+  background: rgba(220, 230, 245, 0.16);
+  border-color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(220, 230, 245, 0.22);
+}
+
+.restart-btn:active {
+  transform: translateY(0);
+}
+
+.restart-btn__icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.5s var(--ease-cinematic);
+}
+
+.restart-btn:hover .restart-btn__icon {
+  transform: rotate(-180deg);
+}

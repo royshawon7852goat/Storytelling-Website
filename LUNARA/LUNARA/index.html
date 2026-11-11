@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LUNARA — Somewhere between dreams and reality. An interactive moonlit parallax storytelling journey.">
+  <meta name="theme-color" content="#080B16">
+  <title>LUNARA — Somewhere Between Dreams and Reality</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="is-loading">
+  <a class="skip-link" href="#section-beginning">Skip to story</a>
+
+  <!-- Preloader Veil -->
+  <div id="preloader" class="preloader" role="status" aria-live="polite" aria-label="Entering the moonlight">
+    <div class="preloader__inner">
+      <div class="preloader__crescent" aria-hidden="true">
+        <span class="preloader__ring"></span>
+        <span class="preloader__orb"></span>
+      </div>
+      <p class="preloader__title">LUNARA</p>
+      <div class="preloader__bar" aria-hidden="true">
+        <span id="preloader-fill" class="preloader__fill"></span>
+      </div>
+      <p class="preloader__caption">Entering the moonlight…</p>
+    </div>
+  </div>
+
+  <!-- Fixed Continuous Celestial Backdrop Stage -->
+  <div id="celestial-stage" class="celestial-stage" aria-hidden="true">
+    <div id="sky-gradient" class="sky-gradient"></div>
+    <div id="horizon-atmosphere" class="horizon-atmosphere">
+      <img
+        src="assets/backgrounds/horizon-glow.png"
+        alt=""
+        class="horizon-atmosphere__img"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+
+    <!-- Starfield: Static Texture + Live Twinkling Canvas -->
+    <div id="stars-layer" class="stage-layer stage-layer--stars">
+      <img src="assets/images/stars.png" alt="" class="stage-img stage-img--cover" decoding="async">
+    </div>
+    <canvas id="starfield-canvas" class="stage-canvas stage-canvas--stars"></canvas>
+
+    <!-- Hero Moon Traveling Across the Entire Story -->
+    <div id="stage-moon" class="stage-moon">
+      <div id="stage-moon-inner" class="stage-moon__inner">
+        <div class="stage-moon__aura"></div>
+        <div class="stage-moon__corona"></div>
+        <img src="assets/images/moon.png" alt="" class="stage-moon__img" decoding="async">
+      </div>
+    </div>
+
+    <!-- Multi-Speed Drifting Cloud Layers (3-panel tracks prevent container edge clipping) -->
+    <div id="clouds-back" class="clouds-layer clouds-layer--back">
+      <div id="clouds-back-offset" class="clouds-offset">
+        <div class="clouds-track clouds-track--slow">
+          <img src="assets/images/clouds.png" alt="" class="clouds-img clouds-img--mirrored" decoding="async">
+          <img src="assets/images/clouds.png" alt="" class="clouds-img" decoding="async">
+          <img src="assets/images/clouds.png" alt="" class="clouds-img clouds-img--mirrored" decoding="async">
+        </div>
+      </div>
+    </div>
+    <div id="clouds-front" class="clouds-layer clouds-layer--front">
+      <div id="clouds-front-offset" class="clouds-offset">
+        <div class="clouds-track clouds-track--medium">
+          <img src="assets/images/clouds.png" alt="" class="clouds-img clouds-img--mirrored" decoding="async">
+          <img src="assets/images/clouds.png" alt="" class="clouds-img" decoding="async">
+          <img src="assets/images/clouds.png" alt="" class="clouds-img clouds-img--mirrored" decoding="async">
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Ambient Stardust Particles -->
+    <canvas id="particles-canvas" class="stage-canvas stage-canvas--particles"></canvas>
+  </div>
+
+  <!-- Ultra-Minimal Chapter Progress Thread -->
+  <nav class="chapter-rail" aria-label="Story chapters">
+    <ol class="chapter-rail__list">
+      <li><a href="#section-beginning" class="chapter-dot is-active" data-chapter="0" aria-label="Chapter 1: The Beginning" aria-current="step"><span class="chapter-dot__pip"></span><span class="chapter-dot__label">The Beginning</span></a></li>
+      <li><a href="#section-whisper" class="chapter-dot" data-chapter="1" aria-label="Chapter 2: The Whisper of the Night"><span class="chapter-dot__pip"></span><span class="chapter-dot__label">Whisper of the Night</span></a></li>
+      <li><a href="#section-forest" class="chapter-dot" data-chapter="2" aria-label="Chapter 3: The Enchanted Forest"><span class="chapter-dot__pip"></span><span class="chapter-dot__label">Enchanted Forest</span></a></li>
+      <li><a href="#section-lake" class="chapter-dot" data-chapter="3" aria-label="Chapter 4: The Silver Lake"><span class="chapter-dot__pip"></span><span class="chapter-dot__label">The Silver Lake</span></a></li>
+      <li><a href="#section-horizon" class="chapter-dot" data-chapter="4" aria-label="Chapter 5: Beyond the Horizon"><span class="chapter-dot__pip"></span><span class="chapter-dot__label">Beyond the Horizon</span></a></li>
+      <li><a href="#section-finale" class="chapter-dot" data-chapter="5" aria-label="Chapter 6: Another Beginning"><span class="chapter-dot__pip"></span><span class="chapter-dot__label">Another Beginning</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- Main Storytelling Journey -->
+  <main id="journey" class="journey">
+
+    <!-- SECTION 1 — THE BEGINNING -->
+    <section id="section-beginning" class="story-section section-beginning" aria-labelledby="hero-title">
+      <div class="scene-layers" aria-hidden="true">
+        <div class="parallax-layer layer-distant-mountains" data-parallax="hero-distant">
+          <img src="assets/backgrounds/distant-mountains.png" alt="" class="scene-img" decoding="async">
+        </div>
+        <div class="parallax-layer layer-mountains" data-parallax="hero-mountains">
+          <img src="assets/images/mountains.png" alt="" class="scene-img" decoding="async">
+        </div>
+        <div class="parallax-layer layer-hero-mist" data-parallax="hero-mist">
+          <img src="assets/backgrounds/mist-fog.png" alt="" class="scene-img scene-img--mist" decoding="async">
+        </div>
+        <div class="parallax-layer layer-forest-hero" data-parallax="hero-forest">
+          <img src="assets/images/forest.png" alt="" class="scene-img" decoding="async">
+        </div>
+      </div>
+
+      <div class="section-content hero-content">
+        <div class="hero-vignette" aria-hidden="true"></div>
+        <h1 id="hero-title" class="hero-title">LUNARA</h1>
+        <p class="hero-subtitle">Somewhere between dreams and reality.</p>
+        <a href="#section-whisper" id="scroll-cue" class="scroll-cue" aria-label="Scroll to begin the journey">
+          <span class="scroll-cue__text">SCROLL TO BEGIN THE JOURNEY</span>
+          <img src="assets/icons/arrow-down.svg" alt="" class="scroll-cue__icon" aria-hidden="true">
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 2 — THE WHISPER OF THE NIGHT -->
+    <section id="section-whisper" class="story-section section-whisper" aria-labelledby="whisper-heading">
+      <h2 id="whisper-heading" class="visually-hidden">The Whisper of the Night</h2>
+      <div class="scene-layers" aria-hidden="true">
+        <div class="parallax-layer whisper-distant-ridge">
+          <img src="assets/backgrounds/distant-mountains.png" alt="" class="scene-img" loading="lazy" decoding="async">
+        </div>
+        <div class="parallax-layer whisper-main-ridge">
+          <img src="assets/images/mountains.png" alt="" class="scene-img" loading="lazy" decoding="async">
+        </div>
+        <div class="parallax-layer whisper-mist">
+          <img src="assets/backgrounds/mist-fog.png" alt="" class="scene-img scene-img--mist" loading="lazy" decoding="async">
+        </div>
+      </div>
+
+      <div class="section-content whisper-content">
+        <div class="text-scrim" aria-hidden="true"></div>
+        <p class="poetic-line poetic-line--lg js-reveal-words" data-reveal="whisper">
+          When the world falls silent, the universe begins to speak.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 3 — THE ENCHANTED FOREST -->
+    <section id="section-forest" class="story-section section-forest" aria-labelledby="forest-heading">
+      <h2 id="forest-heading" class="visually-hidden">The Enchanted Forest</h2>
+      <div class="scene-layers" aria-hidden="true">
+        <div class="parallax-layer forest-distant-mountains">
+          <img src="assets/backgrounds/distant-mountains.png" alt="" class="scene-img" loading="lazy" decoding="async">
+        </div>
+        <div class="parallax-layer forest-pathway-backdrop">
+          <img src="assets/backgrounds/enchanted-path.png" alt="" class="scene-img scene-img--cover" loading="lazy" decoding="async">
+        </div>
+        <div class="moonbeams-overlay">
+          <span class="moonbeam moonbeam--1"></span>
+          <span class="moonbeam moonbeam--2"></span>
+          <span class="moonbeam moonbeam--3"></span>
+        </div>
+        <div class="parallax-layer forest-mid-trees">
+          <img src="assets/images/forest.png" alt="" class="scene-img" loading="lazy" decoding="async">
+        </div>
+        <div class="parallax-layer forest-ground-fog">
+          <img src="assets/backgrounds/mist-fog.png" alt="" class="scene-img scene-img--mist" loading="lazy" decoding="async">
+        </div>
+        <div class="parallax-layer forest-foreground-trees">
+          <img src="assets/backgrounds/forest-foreground.png" alt="" class="scene-img" loading="lazy" decoding="async">
+        </div>
+        <canvas id="fireflies-canvas" class="section-canvas section-canvas--fireflies"></canvas>
+      </div>
+
+      <div class="section-content forest-content">
+        <div class="text-scrim" aria-hidden="true"></div>
+        <p class="poetic-line poetic-line--lg js-reveal-words" data-reveal="forest-1">
+          Every shadow hides a story.
+        </p>
+        <p class="poetic-line poetic-line--lg poetic-line--accent js-reveal-words" data-reveal="forest-2">
+          Every light leads somewhere.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4 — THE SILVER LAKE -->
+    <section id="section-lake" class="story-section section-lake" aria-labelledby="lake-heading">
+      <h2 id="lake-heading" class="visually-hidden">The Silver Lake</h2>
+      <div class="scene-layers" aria-hidden="true">
+        <div class="parallax-layer lake-distant-peaks">
+          <img src="assets/backgrounds/distant-mountains.png" alt="" class="scene-img" loading="lazy" decoding="async">
+        </div>
+        <div class="parallax-layer lake-water-backdrop">
+          <img src="assets/images/lake.png" alt="" class="scene-img scene-img--cover" loading="lazy" decoding="async">
+        </div>
+        <canvas id="lake-reflection-canvas" class="section-canvas section-canvas--lake"></canvas>
+        <div class="parallax-layer lake-shore-mist">
+          <img src="assets/backgrounds/mist-fog.png" alt="" class="scene-img scene-img--mist" loading="lazy" decoding="async">
+        </div>
+      </div>
+
+      <div class="section-content lake-content">
+        <div class="text-scrim" aria-hidden="true"></div>
+        <p class="poetic-line poetic-line--lg js-reveal-words" data-reveal="lake">
+          Somewhere in the silence, we find ourselves.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 5 — BEYOND THE HORIZON -->
+    <section id="section-horizon" class="story-section section-horizon" aria-labelledby="horizon-heading">
+      <h2 id="horizon-heading" class="visually-hidden">Beyond the Horizon</h2>
+      <div class="scene-layers" aria-hidden="true">
+        <div class="parallax-layer horizon-distant-ridge">
+          <img src="assets/backgrounds/distant-mountains.png" alt="" class="scene-img" loading="lazy" decoding="async">
+        </div>
+        <div class="horizon-light-veil"></div>
+      </div>
+
+      <div class="section-content horizon-content">
+        <div class="text-scrim text-scrim--horizon" aria-hidden="true"></div>
+        <p class="poetic-line poetic-line--md js-reveal-words" data-reveal="horizon-1">
+          Not every journey is about finding a destination.
+        </p>
+        <p class="poetic-line poetic-line--lg poetic-line--accent js-reveal-words" data-reveal="horizon-2">
+          Sometimes, it's about discovering what was always within you.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 6 — THE END IS ANOTHER BEGINNING -->
+    <section id="section-finale" class="story-section section-finale" aria-labelledby="finale-title">
+      <div class="finale-glow" aria-hidden="true"></div>
+      <div class="section-content finale-content">
+        <div class="text-scrim text-scrim--finale" aria-hidden="true"></div>
+        <h2 id="finale-title" class="finale-heading js-reveal-words" data-reveal="finale-main">
+          THE NIGHT NEVER TRULY ENDS.
+        </h2>
+        <p class="finale-subtext js-reveal-words" data-reveal="finale-sub">
+          Every ending is simply another beginning.
+        </p>
+        <button type="button" id="restart-btn" class="restart-btn">
+          <img src="assets/icons/restart.svg" alt="" class="restart-btn__icon" aria-hidden="true">
+          <span>RESTART THE JOURNEY</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script defer src="js/animations.js"></script>
+  <script defer src="js/scroll.js"></script>
+  <script defer src="js/main.js"></script>
+</body>
+</html>

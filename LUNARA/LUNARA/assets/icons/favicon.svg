@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#080B16"/>
+  <circle cx="32" cy="32" r="18" fill="url(#moonGlow)" opacity="0.35"/>
+  <path d="M36 16a16 16 0 1 0 12.2 26.35A13 13 0 0 1 36 16Z" fill="#DCE6F5"/>
+  <circle cx="44" cy="21" r="1.6" fill="#F5F7FF"/>
+  <defs>
+    <radialGradient id="moonGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(32 32) rotate(90) scale(24)">
+      <stop stop-color="#DCE6F5"/>
+      <stop offset="1" stop-color="#080B16" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

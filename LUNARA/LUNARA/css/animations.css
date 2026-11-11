@@ -1,0 +1,131 @@
+/* ==========================================================================
+   LUNARA — Ambient Keyframes & Reduced Motion Safeguards
+   ========================================================================== */
+
+@keyframes preloaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scrollFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+@keyframes cloudDriftSlow {
+  0% {
+    transform: translate3d(-16%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-49.3333%, 0, 0);
+  }
+}
+
+@keyframes cloudDriftMedium {
+  0% {
+    transform: translate3d(-24%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-57.3333%, 0, 0);
+  }
+}
+
+@keyframes fogSway {
+  0%,
+  100% {
+    transform: translate3d(-2%, 0, 0);
+  }
+  50% {
+    transform: translate3d(2%, 0, 0);
+  }
+}
+
+@keyframes moonPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+.preloader__ring {
+  animation: preloaderSpin 2.8s linear infinite;
+}
+
+.scroll-cue__icon {
+  animation: scrollFloat 2.4s ease-in-out infinite;
+}
+
+.clouds-track--slow {
+  animation: cloudDriftSlow 95s linear infinite;
+}
+
+.clouds-track--medium {
+  animation: cloudDriftMedium 62s linear infinite;
+}
+
+.scene-img--mist {
+  animation: fogSway 18s ease-in-out infinite;
+}
+
+.stage-moon__aura {
+  animation: moonPulse 7s ease-in-out infinite;
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .preloader__ring,
+  .scroll-cue__icon,
+  .clouds-track--slow,
+  .clouds-track--medium,
+  .scene-img--mist,
+  .stage-moon__aura {
+    animation: none !important;
+  }
+
+  .hero-title,
+  .hero-subtitle,
+  .scroll-cue,
+  .stage-moon,
+  .stage-moon__inner {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none;
+  }
+
+  .whisper-distant-ridge,
+  .whisper-main-ridge,
+  .whisper-mist,
+  .forest-pathway-backdrop,
+  .moonbeams-overlay,
+  .lake-water-backdrop,
+  .horizon-light-veil,
+  .horizon-atmosphere {
+    opacity: 0.72 !important;
+  }
+
+  .reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .restart-btn,
+  .restart-btn__icon,
+  .chapter-dot__pip,
+  .chapter-dot__label {
+    transition: none !important;
+  }
+}
